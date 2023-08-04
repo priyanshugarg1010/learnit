@@ -32,7 +32,6 @@ function SignIn() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const data = new FormData(event.currentTarget);
     try {
       const res = await axios.post(
         "https://learnit-api.onrender.com/user/signin",

@@ -1,7 +1,5 @@
 import { selector } from "recoil";
-import userState from "../atoms/user";
 import courseState from "../atoms/course";
-import { courseStateType, coursetype } from "../atoms/course";
 
 export const isCourseLoading = selector({
   key: "isCourseLoading",

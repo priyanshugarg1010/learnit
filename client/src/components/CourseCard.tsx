@@ -2,10 +2,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Button, CardActions } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import userEmailState from "../store/selectors/userEmail";
@@ -28,7 +28,7 @@ function MultiActionAreaCard({ course }: cardtype) {
   const userEmail = useRecoilValue(userEmailState);
   const handleAddCourse = async ({ course }: cardtype) => {
     try {
-      const res = await axios.post(
+      await axios.post(
         "https://learnit-api.onrender.com/courses/mycourses",
         {
           title: course.title,

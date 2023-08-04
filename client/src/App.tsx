@@ -6,11 +6,8 @@ import StickyFooter from "./components/Footer";
 import Landing from "./pages/Landing";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import ShowCourses from "./pages/Showcourses";
-import { useRecoilValue } from "recoil";
 import Profile from "./pages/Profile";
 import MyCourses from "./pages/MyCourses";
-
-// @variants /
 
 const App: React.FC = () => {
   const Layout = () => {

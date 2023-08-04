@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,37 +15,19 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import axios from "axios";
-import usersState from "../store/atoms/user";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import userEmailState from "../store/selectors/userEmail";
-import isUserLoading from "../store/selectors/isLoading";
-import userState from "../store/atoms/user";
-import { useState } from "react";
 
 const drawerWidth = 240;
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-}
-
-export default function ResponsiveDrawer(props: Props) {
+export default function ResponsiveDrawer() {
   const navigate = useNavigate();
   const userEmail = useRecoilValue(userEmailState);
-  const userLoading = useRecoilValue(isUserLoading);
-  const setUser = useSetRecoilState(userState);
-  const [loggedin, setLoggedin] = useState(
-    !!localStorage.getItem("adminToken")
-  );
 
   const handleLogout = async () => {
     try {
       localStorage.removeItem("acessToken");
 
-      setLoggedin(false);
       await axios.post("https://learnit-api.onrender.com/user/logout");
       window.location.reload();
       navigate("/");

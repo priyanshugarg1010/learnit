@@ -1,5 +1,4 @@
 import { Button } from "@mui/material";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import userEmailState from "../store/selectors/userEmail";
