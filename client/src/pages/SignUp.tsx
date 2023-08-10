@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../config";
 
 function SignUp() {
   const [firstname, setFirstname] = useState<string | null>("");
@@ -36,15 +37,17 @@ function SignUp() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
 
     try {
       const res = await axios.post(
-        "https://learnit-api.onrender.com/user/signup",
+        // "https://learnit-api.onrender.com/user/signup"
+
+        `${BASE_URL}/user/signup`,
         {
           firstname,
           lastname,

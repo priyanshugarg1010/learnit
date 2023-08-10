@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MultiActionAreaCard from "../components/CourseCard";
+import { BASE_URL } from "../../config";
 
 type coursetype = {
   _id: string;
@@ -15,12 +16,17 @@ const ShowCourses = () => {
   const [courses, setCourses] = useState<coursetype[]>([]);
 
   const findCourses = async () => {
-    const res = await axios.get("https://learnit-api.onrender.com/courses", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("acessToken"),
-      },
-      withCredentials: true,
-    });
+    const res = await axios.get(
+      // "https://learnit-api.onrender.com/courses",
+
+      `${BASE_URL}/courses`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("acessToken"),
+        },
+        withCredentials: true,
+      }
+    );
     setCourses(res.data.courses);
   };
 

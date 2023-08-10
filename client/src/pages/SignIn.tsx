@@ -15,12 +15,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import userState from "../store/atoms/user";
 import { useSetRecoilState } from "recoil";
+import { BASE_URL } from "../../config";
 
 function SignIn() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userState);
+  // const BASE_URL = import.meta.env.BASE_URL;
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -34,7 +36,8 @@ function SignIn() {
 
     try {
       const res = await axios.post(
-        "https://learnit-api.onrender.com/user/signin",
+        // "https://learnit-api.onrender.com/user/signin"
+        `${BASE_URL}/user/signin`,
         {
           email,
           password,
@@ -51,7 +54,7 @@ function SignIn() {
       if (typeof err === "string") {
         console.log(err);
       } else {
-        console.log("an unknown error occurred");
+        console.log(err);
       }
     }
   };

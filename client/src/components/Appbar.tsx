@@ -17,6 +17,7 @@ import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import userEmailState from "../store/selectors/userEmail";
+import { BASE_URL } from "../../config";
 
 const drawerWidth = 240;
 
@@ -28,7 +29,11 @@ export default function ResponsiveDrawer() {
     try {
       localStorage.removeItem("acessToken");
 
-      await axios.post("https://learnit-api.onrender.com/user/logout");
+      await axios.post(
+        // "https://learnit-api.onrender.com/user/logout"
+
+        `${BASE_URL}/user/logout`
+      );
       window.location.reload();
       navigate("/");
     } catch (error: unknown) {

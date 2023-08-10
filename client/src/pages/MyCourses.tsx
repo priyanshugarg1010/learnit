@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MultiActionAreaCard from "../components/CourseCard";
+import { BASE_URL } from "../../config";
+import userEmailState from "../store/selectors/userEmail";
+import { useRecoilValue } from "recoil";
 
 type coursetype = {
   _id: string;
@@ -13,20 +16,29 @@ type coursetype = {
 
 const MyCourses = () => {
   const [courses, setCourses] = useState<coursetype[]>([]);
-  const token = localStorage.getItem("acessToken");
-  console.log(token);
+  const userEmail = useRecoilValue(userEmailState);
+  // const token = localStorage.getItem("acessToken");
+  // console.log(token);
 
   const findCourses = async () => {
     const res = await axios.get(
-      "https://learnit-api.onrender.com/courses/mycourses",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
+      // "https://learnit-api.onrender.com/courses/mycourses",
+
+      `${BASE_URL}/courses/mycourses/${userEmail}`
+      // {
+      //   params: {
+      //     userEmail: userEmail,
+      //   },
+      // }
+      // {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //     // userEmail,
+      //   },
+      //   withCredentials: true,
+      // }
     );
-    setCourses(res.data.courses);
+    setCourses(res.data.purchasedCourses);
   };
 
   useEffect(() => {

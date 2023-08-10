@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import userEmailState from "../store/selectors/userEmail";
+import { BASE_URL } from "../../config";
 
 type coursetype = {
   _id: string;
@@ -26,24 +27,12 @@ interface cardtype {
 function MultiActionAreaCard({ course }: cardtype) {
   const navigate = useNavigate();
   const userEmail = useRecoilValue(userEmailState);
-  const handleAddCourse = async ({ course }: cardtype) => {
+
+  const handleAddCourse = async (courseId: string) => {
     try {
-      await axios.post(
-        "https://learnit-api.onrender.com/courses/mycourses",
-        {
-          title: course.title,
-          description: course.description,
-          price: course.price,
-          imageLink: course.imageLink,
-          published: course.published,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("acessToken"),
-          },
-        }
-      );
-      navigate("/courses/mycourses");
+      await axios.post(`${BASE_URL}/courses/${courseId}`, {
+        userEmail,
+      });
     } catch (err: unknown) {
       if (typeof err === "string") {
         console.log(err);
@@ -82,7 +71,7 @@ function MultiActionAreaCard({ course }: cardtype) {
             endIcon={<ShoppingCartIcon />}
             onClick={
               userEmail
-                ? () => handleAddCourse({ course })
+                ? () => handleAddCourse(course._id)
                 : () => navigate("/signin")
             }
           >

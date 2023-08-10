@@ -14,8 +14,10 @@ const App: React.FC = () => {
     return (
       <div>
         <Appbar />
-        <div className="flex flex-column min-h-screen ml-[160px]  xl:ml-[300px] ">
-          <Outlet />
+        <div className="min-h-screen">
+          <div className="flex flex-column  md:ml-[160px]   xl:ml-[250px]">
+            <Outlet />
+          </div>
         </div>
         <StickyFooter />
       </div>
